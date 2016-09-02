@@ -211,16 +211,32 @@ Module UtilityFunctions
         SwinGame.DrawFramerate(675, 585, GameFont("CourierSmall"))
     End Sub
 
+    ''' <summary>
+    ''' Draws an explosion on the specified grid position.
+    ''' </summary>
+    ''' <param name="row">the grid row</param>
+    ''' <param name="col">the grid column</param>
     Public Sub AddExplosion(ByVal row As Integer, ByVal col As Integer)
         AddAnimation(row, col, "Splash")
     End Sub
 
+    ''' <summary>
+    ''' Draws a splash on the specified grid position.
+    ''' </summary>
+    ''' <param name="row">the grid row</param>
+    ''' <param name="col">the grid column</param>
     Public Sub AddSplash(ByVal row As Integer, ByVal col As Integer)
         AddAnimation(row, col, "Splash")
     End Sub
 
     Private _Animations As New List(Of Sprite)()
 
+    ''' <summary>
+    ''' Creates a slpashing animation on the specified grid position.
+    ''' </summary>
+    ''' <param name="row">the grid row</param>
+    ''' <param name="col">the grid column</param>
+    ''' <param name="image">the image to animate</param>
     Private Sub AddAnimation(ByVal row As Integer, ByVal col As Integer, ByVal image As String)
         Dim s As Sprite
         Dim imgObj as Bitmap
@@ -239,6 +255,9 @@ Module UtilityFunctions
         _Animations.Add(s)
     End Sub
 
+    ''' <summary>
+    ''' Unloads animations that have ended.
+    ''' </summary>
     Public Sub UpdateAnimations()
         Dim ended As New List(Of Sprite)()
         For Each s As Sprite In _Animations
@@ -254,12 +273,18 @@ Module UtilityFunctions
         Next
     End Sub
 
+    ''' <summary>
+    ''' Draws the current set of animations to the screen.
+    ''' </summary>
     Public Sub DrawAnimations()
         For Each s As Sprite In _Animations
             SwinGame.DrawSprite(s)
         Next
     End Sub
 
+    ''' <summary>
+    ''' Updates and draws the current set of animations to the screen.
+    ''' </summary>
     Public Sub DrawAnimationSequence()
         Dim i as Integer
 For i  = 1 To ANIMATION_CELLS * FRAMES_PER_CELL

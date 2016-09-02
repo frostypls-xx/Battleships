@@ -64,18 +64,32 @@ Public Class Ship
         End Get
     End Property
 
+    ''' <summary>
+    ''' The column location of the ship
+    ''' </summary>
+    ''' <value>The leftmost location of the ship</value>
+    ''' <returns>the column of the ship</returns>
     Public ReadOnly Property Column() As Integer
         Get
             Return _col
         End Get
     End Property
 
+    ''' <summary>
+    ''' The direction the ship is oriented
+    ''' </summary>
+    ''' <value>The orientation of the ship</value>
+    ''' <returns>the direction of the ship</returns>
     Public ReadOnly Property Direction() As Direction
         Get
             Return _direction
         End Get
     End Property
 
+    ''' <summary>
+    ''' Creates a new ship
+    ''' </summary>
+    ''' <param name="ship">Name of ship</param>
     Public Sub New(ByVal ship As ShipName)
         _shipName = ship
         _tiles = New List(Of Tile)()
@@ -116,6 +130,9 @@ Public Class Ship
         End Get
     End Property
 
+    ''' <summary>
+    ''' IsDestroyed returns if the ships has been hit as many times as it's size.
+    ''' </summary>
     Public ReadOnly Property IsDestroyed() As Boolean
         Get
             Return Hits = Size
@@ -125,9 +142,9 @@ Public Class Ship
     ''' <summary>
     ''' Record that the ship is now deployed.
     ''' </summary>
-    ''' <param name="direction"></param>
-    ''' <param name="row"></param>
-    ''' <param name="col"></param>
+    ''' <param name="direction">The orientation of the ship</param>
+    ''' <param name="row">The row of the grid it is placed</param>
+    ''' <param name="col">the column of the grid it is placed</param>
     Friend Sub Deployed(ByVal direction As Direction, ByVal row As Integer, ByVal col As Integer)
         _row = row
         _col = col

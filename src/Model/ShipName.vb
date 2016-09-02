@@ -1,7 +1,7 @@
 ''' <summary>
-''' The names of all of the ships in the gam
+''' The names of all of the ships in the game
 ''' </summary>
-''' <remarks></remarks>
+''' <remarks>The integer value is used as the size of the ship</remarks>
 Public Enum ShipName
     None = 0
     Tug = 1

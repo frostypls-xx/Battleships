@@ -5,7 +5,7 @@
             "name": "Launch",
             "request": "launch",
             "cwd": "${workspaceRoot}",
-            "program": "${workspaceRoot}/bin/Debug/battleships.exe",
+            "program": "${workspaceRoot}/bin/Debug/Battleships.exe",
             "type": "mono"
         }
     ]

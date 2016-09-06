@@ -38,6 +38,11 @@ Public Class Player : Implements IEnumerable(Of Ship)
         End Set
     End Property
 
+
+    ''' <summary>
+    ''' Constructor for player class.
+    ''' </summary>
+    ''' <value>The BattleShipsGame object.</value>
     Public Sub New(ByVal controller As BattleShipsGame)
         _game = controller
 
@@ -81,6 +86,9 @@ Public Class Player : Implements IEnumerable(Of Ship)
         End Get
     End Property
 
+    ''' <summary>
+    ''' Checks if all of a players ships have been destroyed.
+    ''' </summary>
     Public ReadOnly Property IsDestroyed() As Boolean
         Get
             'Check if all ships are destroyed... -1 for the none ship
@@ -114,6 +122,9 @@ Public Class Player : Implements IEnumerable(Of Ship)
         End Get
     End Property
 
+    ''' <summary>
+    ''' Number of successful hits a player has against the other.
+    ''' </summary>
     Public ReadOnly Property Hits() As Integer
         Get
             Return _hits
@@ -131,6 +142,9 @@ Public Class Player : Implements IEnumerable(Of Ship)
         End Get
     End Property
 
+    ''' <summary>
+    ''' Player's score. Based on the number of successful hits and total ships destroyed.
+    ''' </summary>
     Public ReadOnly Property Score() As Integer
         Get
             If IsDestroyed Then
@@ -198,6 +212,9 @@ Public Class Player : Implements IEnumerable(Of Ship)
         Return result
     End Function
 
+    ''' <summary>
+    ''' Generates a ship at a random location facing a random direction.
+    ''' </summary>
     Public Overridable Sub RandomizeDeployment()
         Dim placementSuccessful As Boolean
         Dim heading As Direction

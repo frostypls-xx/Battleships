@@ -1,5 +1,7 @@
 # README #
 
+## _This branch does not compile as is!_
+
 This project is an implementation of the classic Battleship game.
 
 Requirements:

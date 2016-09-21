@@ -2,8 +2,9 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
+//using System.Data;
 using System.Diagnostics;
+using SwinGameSDK;
 /// <summary>
 /// This includes a number of utility methods for
 /// drawing and interacting with the Mouse.
@@ -132,10 +133,10 @@ static class UtilityFunctions
 
 				draw = true;
 
-				switch (grid.Item(row, col)) {
-					case TileView.Ship:
-						draw = false;
-						break;
+				switch (grid[row, col]) {
+					//case TileView.Ship:
+					//	draw = false;
+					//	break;
 					//If small Then fillColor = _SMALL_SHIP Else fillColor = _LARGE_SHIP
 					case TileView.Miss:
 						if (small)
@@ -194,7 +195,7 @@ static class UtilityFunctions
 			}
 
 			if (!small) {
-				SwinGame.DrawBitmap(GameImage(shipName), colLeft, rowTop);
+				SwinGame.DrawBitmap(GameResources.GameImage(shipName), colLeft, rowTop);
 			} else {
 				SwinGame.FillRectangle(SHIP_FILL_COLOR, colLeft, rowTop, shipWidth, shipHeight);
 				SwinGame.DrawRectangle(SHIP_OUTLINE_COLOR, colLeft, rowTop, shipWidth, shipHeight);
@@ -219,7 +220,7 @@ static class UtilityFunctions
 	/// </summary>
 	public static void DrawMessage()
 	{
-		SwinGame.DrawText(Message, MESSAGE_COLOR, GameFont("Courier"), FIELD_LEFT, MESSAGE_TOP);
+		SwinGame.DrawText(Message, MESSAGE_COLOR, GameResources.GameFont("Courier"), FIELD_LEFT, MESSAGE_TOP);
 	}
 
 	/// <summary>
@@ -228,43 +229,33 @@ static class UtilityFunctions
 
 	public static void DrawBackground()
 	{
-		switch (CurrentState) {
+		switch (GameController.CurrentState) {
 			case GameState.ViewingMainMenu:
 			case GameState.ViewingGameMenu:
 			case GameState.AlteringSettings:
 			case GameState.ViewingHighScores:
-				SwinGame.DrawBitmap(GameImage("Menu"), 0, 0);
+				SwinGame.DrawBitmap(GameResources.GameImage("Menu"), 0, 0);
 				break;
 			case GameState.Discovering:
 			case GameState.EndingGame:
-				SwinGame.DrawBitmap(GameImage("Discovery"), 0, 0);
+				SwinGame.DrawBitmap(GameResources.GameImage("Discovery"), 0, 0);
 				break;
 			case GameState.Deploying:
-				SwinGame.DrawBitmap(GameImage("Deploy"), 0, 0);
+				SwinGame.DrawBitmap(GameResources.GameImage("Deploy"), 0, 0);
 				break;
 			default:
 				SwinGame.ClearScreen();
 				break;
 		}
 
-		SwinGame.DrawFramerate(675, 585, GameFont("CourierSmall"));
+		SwinGame.DrawFramerate(675, 585, GameResources.GameFont("CourierSmall"));
 	}
 
-	/// <summary>
-	/// Draws an explosion on the specified grid position.
-	/// </summary>
-	/// <param name="row">the grid row</param>
-	/// <param name="col">the grid column</param>
 	public static void AddExplosion(int row, int col)
 	{
 		AddAnimation(row, col, "Splash");
 	}
 
-	/// <summary>
-	/// Draws a splash on the specified grid position.
-	/// </summary>
-	/// <param name="row">the grid row</param>
-	/// <param name="col">the grid column</param>
 	public static void AddSplash(int row, int col)
 	{
 		AddAnimation(row, col, "Splash");
@@ -272,18 +263,12 @@ static class UtilityFunctions
 
 
 	private static List<Sprite> _Animations = new List<Sprite>();
-	/// <summary>
-	/// Creates a slpashing animation on the specified grid position.
-	/// </summary>
-	/// <param name="row">the grid row</param>
-	/// <param name="col">the grid column</param>
-	/// <param name="image">the image to animate</param>
 	private static void AddAnimation(int row, int col, string image)
 	{
 		Sprite s = default(Sprite);
 		Bitmap imgObj = default(Bitmap);
 
-		imgObj = GameImage(image);
+		imgObj = GameResources.GameImage(image);
 		imgObj.SetCellDetails(40, 40, 3, 3, 7);
 
 		AnimationScript animation = default(AnimationScript);
@@ -297,15 +282,12 @@ static class UtilityFunctions
 		_Animations.Add(s);
 	}
 
-	/// <summary>
-	/// Unloads animations that have ended.
-	/// </summary>
 	public static void UpdateAnimations()
 	{
 		List<Sprite> ended = new List<Sprite>();
 		foreach (Sprite s in _Animations) {
 			SwinGame.UpdateSprite(s);
-			if (s.animationHasEnded) {
+			if (s.AnimationHasEnded) {
 				ended.Add(s);
 			}
 		}
@@ -316,9 +298,6 @@ static class UtilityFunctions
 		}
 	}
 
-	/// <summary>
-	/// Draws the current set of animations to the screen.
-	/// </summary>
 	public static void DrawAnimations()
 	{
 		foreach (Sprite s in _Animations) {
@@ -326,15 +305,12 @@ static class UtilityFunctions
 		}
 	}
 
-	/// <summary>
-	/// Updates and draws the current set of animations to the screen.
-	/// </summary>
 	public static void DrawAnimationSequence()
 	{
 		int i = 0;
 		for (i = 1; i <= ANIMATION_CELLS * FRAMES_PER_CELL; i++) {
 			UpdateAnimations();
-			DrawScreen();
+			GameController.DrawScreen();
 		}
 	}
 }

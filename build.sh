@@ -29,13 +29,15 @@ SRC_DIR="${APP_PATH}/src"
 LIB_DIR="${APP_PATH}/lib"
 LOG_FILE="${APP_PATH}/out.log"
 
-GMCS_FLAGS="-target:exe -r:./lib/SwinGame.dll" #" -r:Microsoft.VisualBasic"
 CS_FLAGS="-optimize+"
 SG_INC="-I${APP_PATH}/lib/"
 
 if [ "$OS" = "$WIN" ]; then
-   export PATH=$APP_PATH/lib:/c/Program\ Files\ \(x86\)/Mono/bin/:/c/Program\ Files/Mono/bin/:$PATH:/c/Windows/Microsoft.NET/Framework/v4.0.30319
-   GMCS_FLAGS="$GMCS_FLAGS -platform:x86"
+    export PATH=$APP_PATH/lib:/c/Program\ Files\ \(x86\)/Mono/bin/:/c/Program\ Files/Mono/bin/:$PATH:/c/Windows/Microsoft.NET/Framework/v4.0.30319
+    GMCS_FLAGS="-target:exe -r:.\lib\SwinGame.dll,.\packages\NUnit.2.6.4\lib\nunit.framework.dll"
+    GMCS_FLAGS="$GMCS_FLAGS -platform:x86"
+else
+    GMCS_FLAGS="-target:exe -r:./lib/SwinGame.dll,./packages/NUnit.2.6.4/lib/nunit.framework.dll"
 fi
 
 #Locate the compiler...
@@ -52,24 +54,6 @@ if [ -z "$GMCS_BIN" ]; then
             echo "Unable to find a C# compiler. Install Mono or add it to your path."
             exit -1
         fi
-
-        echo "-------------------------------------------------------------------------------"
-        echo "                   !!WARNING!! Using the default C# compiler."
-        echo "-------------------------------------------------------------------------------"
-        echo ""
-        echo " This compiler does not support some C# 6.0 features used in the template."
-        echo ""
-        echo " To use the default compiler:"
-        echo "   1: Remove 'using static SwinGameSDK.SwinGame;'"
-        echo "   2: Add 'SwinGame.' to the front of each call to a SwinGame function. "
-        echo "      For example, change 'OpenGraphicsWindow(...) to"
-        echo "                          'SwinGame.OpenGraphicsWindow(...)'"
-        echo ""
-        echo " ... or install Mono from http://www.mono-project.com/download/#download-win"
-        echo ""
-        echo "-------------------------------------------------------------------------------"
-        echo ""
-        sleep 4
     fi
 fi
 

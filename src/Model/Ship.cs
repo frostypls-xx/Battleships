@@ -1,8 +1,8 @@
+
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Diagnostics;
 /// <summary>
 /// A Ship has all the details about itself. For example the shipname,
@@ -65,35 +65,21 @@ public class Ship
 		get { return _row; }
 	}
 
-	/// <summary>
-	/// The column location of the ship
-	/// </summary>
-	/// <value>The leftmost location of the ship</value>
-	/// <returns>the column of the ship</returns>
 	public int Column {
 		get { return _col; }
 	}
 
-	/// <summary>
-	/// The direction the ship is oriented
-	/// </summary>
-	/// <value>The orientation of the ship</value>
-	/// <returns>the direction of the ship</returns>
 	public Direction Direction {
 		get { return _direction; }
 	}
 
-	/// <summary>
-	/// Creates a new ship
-	/// </summary>
-	/// <param name="ship">Name of ship</param>
 	public Ship(ShipName ship)
 	{
 		_shipName = ship;
 		_tiles = new List<Tile>();
 
 		//gets the ship size from the enumarator
-		_sizeOfShip = _shipName;
+		_sizeOfShip = (int) _shipName;
 	}
 
 	/// <summary>
@@ -129,9 +115,6 @@ public class Ship
 		get { return _tiles.Count > 0; }
 	}
 
-	/// <summary>
-	/// IsDestroyed returns if the ships has been hit as many times as it's size.
-	/// </summary>
 	public bool IsDestroyed {
 		get { return Hits == Size; }
 	}
@@ -139,9 +122,9 @@ public class Ship
 	/// <summary>
 	/// Record that the ship is now deployed.
 	/// </summary>
-	/// <param name="direction">The orientation of the ship</param>
-	/// <param name="row">The row of the grid it is placed</param>
-	/// <param name="col">the column of the grid it is placed</param>
+	/// <param name="direction"></param>
+	/// <param name="row"></param>
+	/// <param name="col"></param>
 	internal void Deployed(Direction direction, int row, int col)
 	{
 		_row = row;
@@ -149,3 +132,10 @@ public class Ship
 		_direction = direction;
 	}
 }
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+//=======================================================

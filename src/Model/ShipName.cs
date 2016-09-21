@@ -1,13 +1,14 @@
+
 using Microsoft.VisualBasic;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
+//using System.Data;
 using System.Diagnostics;
 /// <summary>
-/// The names of all of the ships in the game
+/// The names of all of the ships in the gam
 /// </summary>
-/// <remarks>The integer value is used as the size of the ship</remarks>
+/// <remarks></remarks>
 public enum ShipName
 {
 	None = 0,
@@ -17,3 +18,11 @@ public enum ShipName
 	Battleship = 4,
 	AircraftCarrier = 5
 }
+
+
+//=======================================================
+//Service provided by Telerik (www.telerik.com)
+//Conversion powered by NRefactory.
+//Twitter: @telerik
+//Facebook: facebook.com/telerik
+//=======================================================

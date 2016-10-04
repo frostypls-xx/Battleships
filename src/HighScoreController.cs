@@ -176,9 +176,13 @@ static class HighScoreController
 			GameController.AddNewState(GameState.ViewingHighScores);
 
 			int x = 0;
+			int w = 0;
+			int h = 0;
 			x = SCORES_LEFT + SwinGame.TextWidth(GameResources.GameFont("Courier"), "Name: ");
+			w = SwinGame.TextWidth(GameResources.GameFont("Courier"), "AAAA");
+			h = SwinGame.TextHeight(GameResources.GameFont("Courier"), "AAAA");
 
-			SwinGame.StartReadingText(Color.White, NAME_WIDTH, GameResources.GameFont("Courier"), x, ENTRY_TOP);
+			SwinGame.StartReadingText(Color.White, NAME_WIDTH, GameResources.GameFont("Courier"), SwinGame.RectangleFrom(x, ENTRY_TOP, w, h));
 
 			//Read the text from the user
 			while (SwinGame.ReadingText()) {
